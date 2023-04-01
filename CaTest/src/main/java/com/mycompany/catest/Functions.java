@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Functions extends Thread {
-	
+
 	double StandardDeviation;
-	List<Double> data = new ArrayList<>();   
-	double[] finalVal = data.stream().mapToDouble(Double::doubleValue).toArray(); 
-	double mean = Arrays.stream(finalVal).average().orElse(Double.NaN);
+	List<Integer> data = new ArrayList<>();   
+	double mean ;
+	int length;
+	int finalVal ;
 	
 	public Functions ( ) throws FileNotFoundException {
     //Scanner method for reading the file
@@ -26,24 +27,30 @@ public class Functions extends Thread {
     //Saving data into an array
     	String value = sc.nextLine();
     	
+    
     //Split values into ,	
-    	String [] splitNum = value.split(",");
+    	String[] splitNum = value.split(",");
     	
     //for loop to add value into array	
     for(String number : splitNum) {
-    data.add(Double.valueOf(number));	
+    int Val = 	Integer.parseInt(number);
+    data.add(Val);
     
-    }
+    
+   // System.out.println(data);
+    
+    	}
    
-    }
-    System.out.println(data);
-    System.out.println(mean);
-	
-    
-    //Closing scanner
+	}
+  //Creating variable to calculate standard deviation
+    int length = data.size();
+  //Print to see if its working  
+   int mean =500 % length;
+   System.out.println(data);
+   System.out.println(mean);
+  //Closing Scanner
     sc.close(); 
 	}
-	
 }
     
           

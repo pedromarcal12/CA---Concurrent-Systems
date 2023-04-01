@@ -21,7 +21,7 @@ public class CaTest{
     	
     	Functions thread1 = new Functions();
     	
-    	System.out.println(thread1);
+    	
     	
     	
     	
