@@ -10,10 +10,11 @@ import java.util.Scanner;
 public class Functions extends Thread {
 
 	double StandardDeviation;
-	List<Integer> data = new ArrayList<>();   
+	int[]finalVal ;
+	List<Integer> data = new ArrayList<>();
 	double mean ;
 	int length;
-	int finalVal ;
+	 
 	
 	public Functions ( ) throws FileNotFoundException {
     //Scanner method for reading the file
@@ -21,7 +22,7 @@ public class Functions extends Thread {
     
     //Splitting value inside file using 
     sc.useDelimiter(",");
-    
+    try {
     //While loop to read file until last line
     while (sc.hasNextLine())  {
     //Saving data into an array
@@ -33,24 +34,30 @@ public class Functions extends Thread {
     	
     //for loop to add value into array	
     for(String number : splitNum) {
-    int Val = 	Integer.parseInt(number);
-    data.add(Val);
-    
-    
-   // System.out.println(data);
+    data.add(Integer.parseInt(number));
     
     	}
-   
+    
 	}
+   //Saving the data and converting the list into array
+    int[] finalVal = data.stream().mapToInt(Integer::intValue).toArray();
+    
   //Creating variable to calculate standard deviation
     int length = data.size();
-  //Print to see if its working  
-   int mean =500 % length;
-   System.out.println(data);
+    
+  //Creating first method to find the mean number; 
+   int mean = finalVal[5] % length;
+   
+   System.out.println(Arrays.toString(finalVal));
    System.out.println(mean);
-  //Closing Scanner
+ 
+   //Closing Scanner
+   
     sc.close(); 
+	}finally {
+		
 	}
+}
 }
     
           
