@@ -3,14 +3,11 @@
 package com.mycompany.catest;
 
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner; 
+
 
 /**
  *
- * @author 35389
+ * @author Pedro Marcal - 2020300
  */
 public class CaTest{
 
@@ -19,12 +16,10 @@ public class CaTest{
     public static void main(String[] args) throws Exception {
     	
     	
-    	Functions thread1 = new Functions();
-    	
-    	
-    	
-    	
-    	
+    	StandardDeviation thread1 = new StandardDeviation();
+    	MergeSort thread2 = new MergeSort(null, 0, 0, 0);
+
+    	System.out.println(thread1);
     }
    
 }
