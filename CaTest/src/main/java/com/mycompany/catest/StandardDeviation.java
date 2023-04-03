@@ -16,6 +16,7 @@ public class StandardDeviation extends Thread {
     int length;
     double sum;
     int i;
+    String val ;
     
     public StandardDeviation() throws FileNotFoundException {
 
@@ -49,13 +50,6 @@ public class StandardDeviation extends Thread {
             // Creating variable to get the size of the array;
             length = data.size();
             
-            for (int i = 0; i < finalVal.length; i++) {	
-                for(int j = 0; j < finalVal[0]; j++) {
-                    
-                }
-                
-            }
-
             // Creating method to find the mean number;
             DoubleSummaryStatistics stats = data.stream()
                     .mapToDouble(Integer::doubleValue)
@@ -69,8 +63,11 @@ public class StandardDeviation extends Thread {
                     .sum();
             standardDeviation = Math.sqrt(sum / length);
         
-            // Printing values to see if it is working;
-            System.out.println("\nStandard Deviation: "+standardDeviation);
+            // Converting value to String with only 4 values after ,
+            String val = String.format("%.4f", standardDeviation);
+            
+            // Printing results;
+            System.out.println("Standard Deviation: "+val);
 
             // Closing Scanner
             sc.close();

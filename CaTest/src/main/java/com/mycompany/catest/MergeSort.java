@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MergeSort extends Thread  {
-
+public class MergeSort extends Thread {
+	
 	int[] finalVal;
     List<Integer> data = new ArrayList<>();
 	
@@ -35,14 +35,16 @@ public class MergeSort extends Thread  {
 	            }
 
 	        }
-		
-		
-		int arrayOne = mid - left +1;
+		mid = 15;
+		left = 5;
+		right = 50;
+		int arrayOne = mid + left +1;
 		int arrayTwo = right - mid;
 		
 		int[] leftArray = new int [arrayOne];
 		int[] rightArray = new int [arrayTwo];
-	
+		
+			System.out.println("Im working");
 }finally{
 	
 }
