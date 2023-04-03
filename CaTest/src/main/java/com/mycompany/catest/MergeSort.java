@@ -11,8 +11,9 @@ public class MergeSort extends Thread {
 	
 	int[] finalVal;
     List<Integer> data = new ArrayList<>();
-	
-	public MergeSort(int[]array, int left, int right, int mid ) throws FileNotFoundException  {
+	int length ;
+    
+	public MergeSort(int[]arrayOne, int[]arrayTwo, int left, int right, int mid ) throws FileNotFoundException  {
 		 // Scanner method for reading the file
 	    Scanner sc = new Scanner(new File("C:\\Users\\henri\\Downloads\\data.csv"));
 
@@ -22,6 +23,8 @@ public class MergeSort extends Thread {
 	    	
 	        // While loop to read file until last line
 	        while (sc.hasNextLine()) {
+	        	
+	        	
 	            // Saving data into a String
 	            String value = sc.nextLine();
 
@@ -31,20 +34,36 @@ public class MergeSort extends Thread {
 	            // For loop to add value into array
 	            for (String num : splitNum) {
 	                data.add(Integer.parseInt(num));
-
 	            }
 
 	        }
-		mid = 15;
-		left = 5;
-		right = 50;
-		int arrayOne = mid + left +1;
-		int arrayTwo = right - mid;
+	        
+	    // Variables to get size of the array and the mid of the array    
+		length = data.size();
+		mid = length / 2;
 		
-		int[] leftArray = new int [arrayOne];
-		int[] rightArray = new int [arrayTwo];
+		// Creating first array with the mid size
+		arrayOne = new int [mid];
 		
-			System.out.println("Im working");
+		// Creating second array with the length minus o mid size, giving us the other half
+		arrayTwo = new int [length - mid];
+		
+		// For loop to store value in the left size array
+		for (int i = 0; i < mid; i++) {
+			arrayOne[i] = data.get(i);
+			
+		}
+		
+		// For loop to store value in the other half of the array
+		for (int i = mid; i < length; i++) {
+			arrayTwo[i - mid] = data.get(i);
+		}
+		     
+		//MergeSort(arrayOne);
+		//MergeSort(arrayTwo);
+		
+		System.out.println(arrayOne.length);
+		System.out.println("Im working");
 }finally{
 	
 }

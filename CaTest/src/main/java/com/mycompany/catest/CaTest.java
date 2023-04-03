@@ -28,28 +28,30 @@ public class CaTest{
 			System.out.println(thread1);
 			
 		} if (num == 2) {
-			MergeSort thread2 = new MergeSort(null, 0, 0, 0);
+			MatrizResult thread2 = new MatrizResult();
 			System.out.println(thread2);
 			
 		} if (num == 3) {
-			MatrizResult thread3 = new MatrizResult();
+			MergeSort thread3 = new MergeSort(null,null, 0, 0, 0);
 			System.out.println(thread3);
 			
 		} if (num == 4) {
 			  new StandardDeviation();	
-			  new MergeSort(null, 0, 0, 0);
+			  new MergeSort(null, null, 0, 0, 0);
 			  new MatrizResult();
 			  
 		} if (num == 5) {
+			  StandardDeviation.sleep(5000);			
 			  new StandardDeviation();
-			  StandardDeviation.sleep(500);
-			  new MergeSort(null, 0, 0, 0);
 			  MergeSort.sleep(5000);
-			  new MatrizResult();
+			  new MergeSort(null, null, 0, 0, 0);
 			  MatrizResult.sleep(4000);
+			  new MatrizResult();
+			  
 			  
 		} else if (num >= 6) {
 			System.out.println("Wrong input!");
+			
 		}
    
 
