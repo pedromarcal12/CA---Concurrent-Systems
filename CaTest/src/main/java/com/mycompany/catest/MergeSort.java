@@ -8,98 +8,87 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MergeSort extends Thread {
-	
+
 	public static void main (String[] args) throws FileNotFoundException {
 		
 		List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
-		mergeSort(data);
-		System.out.println(data);
+		mergeSort(data,  0, data.size() - 1);
+		System.out.println("The array sorted is: " + data);
 	}
-			
-		
-		public static List<Integer> mergeSort(List<Integer>data) {
-			int length = data.size();
-			
-			if (length <= 1) {
-				return data;
-			}
-				
-				int mid = length / 2;
-				
-				
-				List<Integer> l = data.subList(0, mid);
-				List<Integer>r = data.subList(mid, length);
-				//lef
-				
-				return r;
-				
-				
-				//MergeSort(left);
-				//MergeSort(data, mid +1, right);
-				//merge(data, left, mid, right);
-				
-				
-			}
-			
-		
+	
 
+	public static List<Integer>file(String file) throws FileNotFoundException {
+		List<Integer>data = new ArrayList<>();
 		
+	  try (Scanner sc = new Scanner(new File(file))) {
+		 while (sc.hasNextLine()) {
+			 String [] num = sc.nextLine().split(",");
+			 for (String nums : num) {
+				 data.add(Integer.parseInt(nums));
+			 }
+				 
+		 }
+	  }
+	return data;
+	
+	 
+}
+
+	
+		// Creating the mergeSort method 	
+		public static List<Integer> mergeSort(List<Integer>data, int left, int right) {
+			
+			// sorting the numbers while 
+			if (left < right ) {
+				int mid = (right + left) / 2;
+				mergeSort(data, left, mid);
+				mergeSort(data, mid +1, right);
+				merge(data, left, right, mid);
+			}
+				return data;
+			
+			
+			}
+			
+		// Method that will merge the values
 		public static void merge(List<Integer>data, int left, int right, int mid)	 {
-			List<Integer> leftArray = new ArrayList<>();
-			List<Integer> rightArray = new ArrayList<>();
-			int sizeLeft = mid - left + 1;
-			int sizeRight = right - mid;
+			List<Integer> leftArray = new ArrayList<>(data.subList(left, mid + 1));
+			List<Integer> rightArray = new ArrayList<>(data.subList(mid + 1, right +1));
+			int sizeLeft = leftArray.size();
+			int sizeRight = rightArray.size();
 			
-			
-			for (int i = 0; i < sizeLeft; i++) {
-				leftArray.add(data.get(left + i));
-			}
-			for (int i = 0; i < sizeRight; i++) {
-				rightArray.add(data.get(mid + 1 + i));
-			}
+			// a being left Array
 			int a = 0;
+			// b being right array
 			int b = 0;
+			// c meaning currently left value
 			int c = left;
 			
+			
+			
+			// While loop until we reach all the values
 			while (a < sizeLeft && b < sizeRight) {
+				// Comparing the current value, if bigger will be placed first
 				if (leftArray.get(a) >= rightArray.get(b)) {
-					data.set(c++, leftArray.get(a));
+					data.set(c++, leftArray.get(a++));
+					
+				// Else, if the value is smaller, will be placed after	
 				} else {
-					data.set(c++, rightArray.get(b));
+					data.set(c++, rightArray.get(b++));
 				}
+				
+				// Adding value 
 			}
 			while (a < sizeLeft) {
-				data.set(c++, leftArray.get(a));
+				data.set(c++, leftArray.get(a++));
 			}
 			while (b < sizeRight) {
-				data.set(c++, rightArray.get(b));
+				data.set(c++, rightArray.get(b++));
 			}
 		
 		}
 	
 		
-		public static List<Integer>file(String fileName) throws FileNotFoundException {
-			List<Integer>data = new ArrayList<>();
-			
-		  try (Scanner sc = new Scanner(new File(fileName))) {
-			  
-		    while (sc.hasNextLine()) {
-		    String line = sc.nextLine();
-		    String[] split = line.split(","); 
-		    
-		    for (String nums : split) {
-		    	int num = Integer.parseInt(nums);
-		    	data.add(num);
-		    }
-		   
-			
-		}
-		  } finally {
-			  
-		  }
-		return data;
-
-		}
 }
 
 
