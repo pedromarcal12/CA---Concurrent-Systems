@@ -1,25 +1,23 @@
 package com.mycompany.catest;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MergeSort extends Thread {
+public class MergeSort2 extends Thread {
 
-	private List<Integer> data;
+	public static void main (String[] args) throws FileNotFoundException {
+		
+		List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
+		mergeSort(data,  0, data.size() - 1);
+		System.out.println("The array sorted is: " + data);
+	}
+	
 
-    public MergeSort(List<Integer> data) {
-        this.data = data;
-    }
-
-    public void run() {
-        List<Integer> finalVal = mergeSort(data, 0, data.size() - 1);
-        System.out.println(finalVal);
-        
-    }
-    public static List<Integer>file(String file) throws FileNotFoundException {
+	public static List<Integer>file(String file) throws FileNotFoundException {
 		List<Integer>data = new ArrayList<>();
 		
 	  try (Scanner sc = new Scanner(new File(file))) {
@@ -92,3 +90,6 @@ public class MergeSort extends Thread {
 	
 		
 }
+
+
+
