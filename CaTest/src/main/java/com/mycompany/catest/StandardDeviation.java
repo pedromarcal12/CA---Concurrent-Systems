@@ -57,7 +57,6 @@ public class StandardDeviation extends Thread {
             double mean = stats.getAverage();
             
             // Method to calculate the standard deviation;
-            // 
             double sum = data.stream()
                     .mapToDouble(x -> Math.pow(x - mean, 2))
                     .sum();

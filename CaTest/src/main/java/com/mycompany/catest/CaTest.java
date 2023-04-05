@@ -17,47 +17,41 @@ public class CaTest extends Thread {
 	
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
     
+    	List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
+    	
     	
     	
     	try (Scanner scanner = new Scanner(System.in)) {
+    		MergeSort mergeSortThread = new MergeSort(data);
+    		MatrizResult thread2 = new MatrizResult(data);
     		
-    		List<Integer>data = MergeSort.file("C:\\Users\\henri\\Downloads\\data.csv");
     		int num;
 			
     		
 			System.out.println("Type down :");
 			System.out.println("1 - Standard Deviation \n" + "2 - Result of the matrizes \n" + 
-			"3 - MergeSort \n" + "4 - All results in multithread \n" + "5 - All results in multithread with sleep thread implementation\n ");
+			"3 - MergeSort \n" + "4 - All results in multithread \n");
 			
 			num = scanner.nextInt();
-			MergeSort mergeSortThread = new MergeSort(data);
-			StandardDeviation sdThread = new StandardDeviation();
+			
 			
 		  if (num == 1) {
+			StandardDeviation sdThread = new StandardDeviation();
 			sdThread.start();
 			
 		} if (num == 2) {
-			MatrizResult thread2 = new MatrizResult();
-			System.out.println(thread2);
+			thread2.start();
 			
 		} if (num == 3) {
 			mergeSortThread.start();
 			
 		} if (num == 4) {
-			  sdThread.start();	
-			  System.out.println(sdThread);
+			StandardDeviation sdThread = new StandardDeviation();
+			  sdThread.start(); 
 			  mergeSortThread.start();
+			  thread2.start();	 
 			  
-			  new MatrizResult();
-			  
-		} if (num == 5) {
-			  sdThread.start();	
-			  mergeSortThread.start();
-			  
-			  // MatrizResult.sleep(4000);
-			  //new MatrizResult();
-			  
-		} else if (num >= 6) {
+		} else if (num >= 5) {
 			System.out.println("Wrong input!");
 			
 		}
