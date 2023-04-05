@@ -9,63 +9,98 @@ import java.util.Scanner;
 
 public class MergeSort extends Thread {
 	
-	int[] finalVal;
-    List<Integer> data = new ArrayList<>();
-	int length ;
-    
-	public MergeSort(int[]arrayOne, int[]arrayTwo, int left, int right, int mid ) throws FileNotFoundException  {
-		 // Scanner method for reading the file
-	    Scanner sc = new Scanner(new File("C:\\Users\\henri\\Downloads\\data.csv"));
-
-	    // Splitting value inside file using
-	    sc.useDelimiter(",");
-	    try {
-	    	
-	        // While loop to read file until last line
-	        while (sc.hasNextLine()) {
-	        	
-	        	
-	            // Saving data into a String
-	            String value = sc.nextLine();
-
-	            // Split values into , and storing in an Array;
-	            String[] splitNum = value.split(",");
-
-	            // For loop to add value into array
-	            for (String num : splitNum) {
-	                data.add(Integer.parseInt(num));
-	            }
-
-	        }
-	        
-	    // Variables to get size of the array and the mid of the array    
-		length = data.size();
-		mid = length / 2;
+	public static void main (String[] args) throws FileNotFoundException {
 		
-		// Creating first array with the mid size
-		arrayOne = new int [mid];
+		List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
+		mergeSort(data);
+		System.out.println(data);
+	}
+			
 		
-		// Creating second array with the length minus o mid size, giving us the other half
-		arrayTwo = new int [length - mid];
+		public static List<Integer> mergeSort(List<Integer>data) {
+			int length = data.size();
+			
+			if (length <= 1) {
+				return data;
+			}
+				
+				int mid = length / 2;
+				
+				
+				List<Integer> l = data.subList(0, mid);
+				List<Integer>r = data.subList(mid, length);
+				//lef
+				
+				return r;
+				
+				
+				//MergeSort(left);
+				//MergeSort(data, mid +1, right);
+				//merge(data, left, mid, right);
+				
+				
+			}
+			
 		
-		// For loop to store value in the left size array
-		for (int i = 0; i < mid; i++) {
-			arrayOne[i] = data.get(i);
+
+		
+		public static void merge(List<Integer>data, int left, int right, int mid)	 {
+			List<Integer> leftArray = new ArrayList<>();
+			List<Integer> rightArray = new ArrayList<>();
+			int sizeLeft = mid - left + 1;
+			int sizeRight = right - mid;
+			
+			
+			for (int i = 0; i < sizeLeft; i++) {
+				leftArray.add(data.get(left + i));
+			}
+			for (int i = 0; i < sizeRight; i++) {
+				rightArray.add(data.get(mid + 1 + i));
+			}
+			int a = 0;
+			int b = 0;
+			int c = left;
+			
+			while (a < sizeLeft && b < sizeRight) {
+				if (leftArray.get(a) >= rightArray.get(b)) {
+					data.set(c++, leftArray.get(a));
+				} else {
+					data.set(c++, rightArray.get(b));
+				}
+			}
+			while (a < sizeLeft) {
+				data.set(c++, leftArray.get(a));
+			}
+			while (b < sizeRight) {
+				data.set(c++, rightArray.get(b));
+			}
+		
+		}
+	
+		
+		public static List<Integer>file(String fileName) throws FileNotFoundException {
+			List<Integer>data = new ArrayList<>();
+			
+		  try (Scanner sc = new Scanner(new File(fileName))) {
+			  
+		    while (sc.hasNextLine()) {
+		    String line = sc.nextLine();
+		    String[] split = line.split(","); 
+		    
+		    for (String nums : split) {
+		    	int num = Integer.parseInt(nums);
+		    	data.add(num);
+		    }
+		   
 			
 		}
-		
-		// For loop to store value in the other half of the array
-		for (int i = mid; i < length; i++) {
-			arrayTwo[i - mid] = data.get(i);
+		  } finally {
+			  
+		  }
+		return data;
+
 		}
-		     
-		//MergeSort(arrayOne);
-		//MergeSort(arrayTwo);
-		
-		System.out.println(arrayOne.length);
-		System.out.println("Im working");
-}finally{
-	
 }
-}
-}
+
+
+

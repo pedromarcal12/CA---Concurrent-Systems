@@ -32,19 +32,19 @@ public class CaTest{
 			System.out.println(thread2);
 			
 		} if (num == 3) {
-			MergeSort thread3 = new MergeSort(null,null, 0, 0, 0);
+			MergeSort thread3 = new MergeSort();
 			System.out.println(thread3);
 			
 		} if (num == 4) {
 			  new StandardDeviation();	
-			  new MergeSort(null, null, 0, 0, 0);
+			  new MergeSort();
 			  new MatrizResult();
 			  
 		} if (num == 5) {
 			  StandardDeviation.sleep(5000);			
 			  new StandardDeviation();
 			  MergeSort.sleep(5000);
-			  new MergeSort(null, null, 0, 0, 0);
+			  new MergeSort();
 			  MatrizResult.sleep(4000);
 			  new MatrizResult();
 			  
