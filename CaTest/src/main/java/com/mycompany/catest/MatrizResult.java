@@ -10,8 +10,8 @@ public class MatrizResult extends Thread {
 		
 	//Declaring first variables
 		private List<Integer> data;
-		int[][] firstMatrix = new int[20][10];
-		 int[][] secMatrix = new int[20][10];
+		int[][] firstMatrix;
+		int[][] secMatrix;
 		
 		 public MatrizResult (List<Integer> data) {
 		        this.data = data;
@@ -28,17 +28,32 @@ public class MatrizResult extends Thread {
 				 while (sc.hasNextLine()) {
 					 String [] num = sc.nextLine().split(",");
 					 for (String nums : num) {
+						 for (int i = 0; i < 10; i++) {
+								for (int a = 0; a < 20; a++) {
+									firstMatrix[i][a]= sc.nextInt();
+									secMatrix[i][a] = sc.nextInt();
 						 data.add(Integer.parseInt(nums));
 					 }
-						 
-				 }
-			  }
+						
+							}
+				 
+						}
+				 
+			  
 			return data;
 
 		 }
 		 
-		 public Matrix ( ) {
-			 
+		 public static int[][] calculateVal (int[][] firstMatrix, int[][] secMatrix){
+			 int[][] val = new int [20][10];
+			 for (int i = 0; i < 20; i++) {
+				 for (int a = 0; a < 10; a++) {
+					 for (int b = 0; b < 20; b++) {
+						 val[i][a] += firstMatrix[i][a] * secMatrix[b][a];
+					 }
+				 }
+			 }
+			 return val;
 		 }
 
 		 	
