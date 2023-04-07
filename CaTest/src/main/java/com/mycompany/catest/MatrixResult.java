@@ -1,71 +1,89 @@
 package com.mycompany.catest;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
 
-public class MatrixResult extends Thread {
-		
-	//Declaring first variables
-		private static int[][] firstMatrix;
-		private static int[][] secMatrix;
-		private static int[][] result;
-		 
-public MatrixResult (int[][] firstMatrix, int[][] secMatrix ) {
-         MatrixResult.firstMatrix = firstMatrix;
-         MatrixResult.secMatrix = secMatrix;
-         MatrixResult.result = new int[firstMatrix.length][secMatrix[0].length];
-}
+public class MatrixResult implements Runnable  {
+    
+	// Creating variables
+	private List<Double> values;
 
-public void run() {
-	try {
-		// Reading file and saving in matrix format
-			
-        Scanner sc = new Scanner(new File ("C:\\\\Users\\\\henri\\\\Downloads\\\\data.csv"));
-        
-        // Splitting value inside file using ,
-        sc.useDelimiter(",\\n]");
-        
-        // Reading every line and add it to the matrix
-        for (int i = 0; i < firstMatrix.length; i++) {
-        	String[] line = sc.nextLine().split(","); 
-        	for (int j = 0; j < secMatrix[0].length; j++) {
-        		firstMatrix[i][j] = Integer.parseInt(line[j]);
-        	}
-        	
-        	
+    public MatrixResult(List<Double> values) {
+        this.values = values;
+    }
+
+    @Override
+    public void run() {
+        // Dividing by 2 10x10 matrix
+        List<Double> firstMatrix = values.subList(0, 100);
+        List<Double> secMatrix = values.subList(100, 200);
+
+        double[][] matrix = new double[10][10];
+        double[][] matrix2 = new double[10][10];
+        int ind = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+            	matrix[i][j] = firstMatrix.get(ind++);
+                matrix2[j][i] = secMatrix.get(ind++);
+            }
         }
-        // Closing scanner
-        sc.close();
         
-        for (int i = 0; i < firstMatrix.length; i++) {
-        	for (int j = 0; j < secMatrix[0].length; j++) {
-        		for (int k = 0; k < firstMatrix[0].length; k++) {
-        		result[i][j] += firstMatrix[i][k] * secMatrix[k][j]; 
-        	}
-        }
-	
-	
-	}	
+        // Creating empty array for the results
+        double[][] resultMatrix = new double[20][10];
         
-        // Printing results
-        System.out.println("Result: ");
-        for (int i = 0; i < result.length; i++) {
-        	for (int j = 0; j < result[0].length; j++) {
-        		System.out.print(result[i][j] + " ");
-        	
-        	}
-        	System.out.println();
+        // Calculating each of the sum and storing it in array
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                double sum = 0;
+                for (int k = 0; k < 10; k++) {
+                    sum += matrix[i][k] * matrix2[k][j];
+                }
+                resultMatrix[i][j] = sum;
+            }
         }
-		
-}	  catch (FileNotFoundException e ) {
-	System.out.println("!!");
-}
-			
-}
-}
+
+        // Print the result
+        System.out.println("Matrix Result:");
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                int value = (int) Math.round(resultMatrix[i][j]);
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+    	 String filePath = "C:\\Users\\henri\\Downloads\\data.csv";
+         String separator = ",";
+        List<Double> values = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] tokens = line.split(separator);
+                for (String token : tokens) {
+                    values.add(Double.parseDouble(token));
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading input file: " + e.getMessage());
+            
+        }
+
+        MatrixResult multiplication = new MatrixResult(values);
+        Thread thread = new Thread(multiplication);
+        thread.start();
+    
+
+        }
+        
+    }
+
+
 
 
 

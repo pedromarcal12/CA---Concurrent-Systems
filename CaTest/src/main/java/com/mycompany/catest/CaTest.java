@@ -17,19 +17,29 @@ public class CaTest extends Thread {
 	
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
     
+    	// Had to read and save the files here, was the only way to do it
+    	Scanner sc = new Scanner(new File("C:\\Users\\henri\\Downloads\\data.csv"));
+        List <Double>values = new ArrayList<Double>();
+        while (sc.hasNext()) {
+            String value = sc.next();
+            if (!value.isEmpty()) {
+                values.add(Double.parseDouble(value));
+            }
+        }
+        sc.close();
+        
+        
     	List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
     	
-    	// Initializing Matrix Threads variables
-    	int [][]firstMatrix = new int [20][10];
-    	int [][]secMatrix = new int [20][10];
+    	
+    	
+    	//MatrixResult matrixThread = new MatrixResult("C:\\Users\\henri\\Downloads\\data.csv");
     	
     	
     	try (Scanner scanner = new Scanner(System.in)) {
     		
     		// Initializing MergeSort Thread
-    		MergeSort mergeSortThread = new MergeSort(data);
-    		MatrixResult matrixThread = new MatrixResult(firstMatrix, secMatrix);
-    		
+    		MergeSort mergeSortThread = new MergeSort(data);    		
     		int num;
 			
     		
@@ -38,14 +48,14 @@ public class CaTest extends Thread {
 			"3 - MergeSort \n" + "4 - All results in multithread \n");
 			
 			num = scanner.nextInt();
-			
+			MatrixResult matrixResultThread = new MatrixResult(values);
 			
 		  if (num == 1) {
 			StandardDeviation sdThread = new StandardDeviation();
 			sdThread.start();
 			
 		} if (num == 2) {
-			matrixThread.start();
+			matrixResultThread.run();
 			
 		} if (num == 3) {
 			mergeSortThread.start();
@@ -54,7 +64,7 @@ public class CaTest extends Thread {
 			StandardDeviation sdThread = new StandardDeviation();
 			  sdThread.start(); 
 			  mergeSortThread.start();
-			  matrixThread.start();	 
+			  matrixResultThread.run();	 
 			  
 		} else if (num >= 5) {
 			System.out.println("Wrong input!");
