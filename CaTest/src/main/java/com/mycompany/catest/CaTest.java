@@ -19,11 +19,16 @@ public class CaTest extends Thread {
     
     	List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
     	
+    	// Initializing Matrix Threads variables
+    	int [][]firstMatrix = new int [20][10];
+    	int [][]secMatrix = new int [20][10];
     	
     	
     	try (Scanner scanner = new Scanner(System.in)) {
+    		
+    		// Initializing MergeSort Thread
     		MergeSort mergeSortThread = new MergeSort(data);
-    		MatrizResult thread2 = new MatrizResult(data);
+    		MatrixResult matrixThread = new MatrixResult(firstMatrix, secMatrix);
     		
     		int num;
 			
@@ -40,7 +45,7 @@ public class CaTest extends Thread {
 			sdThread.start();
 			
 		} if (num == 2) {
-			thread2.start();
+			matrixThread.start();
 			
 		} if (num == 3) {
 			mergeSortThread.start();
@@ -49,7 +54,7 @@ public class CaTest extends Thread {
 			StandardDeviation sdThread = new StandardDeviation();
 			  sdThread.start(); 
 			  mergeSortThread.start();
-			  thread2.start();	 
+			  matrixThread.start();	 
 			  
 		} else if (num >= 5) {
 			System.out.println("Wrong input!");
@@ -58,6 +63,9 @@ public class CaTest extends Thread {
    
 
 }
+    	
+    	
+    	// Other reading file method
     }
     public static List<Integer>file(String file) throws FileNotFoundException {
 		List<Integer>data = new ArrayList<>();
