@@ -19,25 +19,29 @@ public class MatrixResult implements Runnable  {
     @Override
     public void run() {
         // Dividing by 2 10x10 matrix
-        List<Double> firstMatrix = values.subList(0, 100);
-        List<Double> secMatrix = values.subList(100, 200);
+    	int v = (int) Math.sqrt(values.size()/ 2);
+        List<Double> firstMatrix = values.subList(0, v * v);
+        List<Double> secMatrix = values.subList(v * v, values.size());
 
-        double[][] matrix = new double[10][10];
-        double[][] matrix2 = new double[10][10];
+        double[][] matrix = new double[v][v];
+        double[][] matrix2 = new double[v][v];
         int ind = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-            	matrix[i][j] = firstMatrix.get(ind++);
-                matrix2[j][i] = secMatrix.get(ind++);
+        for (int i = 0; i < v; i++) {
+            for (int j = 0; j < v; j++) {
+            		matrix[i][j] = firstMatrix.get(ind++);
             }
+            }
+        for (int j = 0; j < 10; j++) {
+        	for (int k = 0; k < 10; k++) {
+                matrix2[k][j] = secMatrix.get(ind++);
         }
-        
+        }
         // Creating empty array for the results
-        double[][] resultMatrix = new double[20][10];
+        double[][] resultMatrix = new double[10][10];
         
         // Calculating each of the sum and storing it in array
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < v; i++) {
+            for (int j = 0; j < v; j++) {
                 double sum = 0;
                 for (int k = 0; k < 10; k++) {
                     sum += matrix[i][k] * matrix2[k][j];
@@ -59,14 +63,14 @@ public class MatrixResult implements Runnable  {
 
     public static void main(String[] args) {
     	 String filePath = "C:\\Users\\henri\\Downloads\\data.csv";
-         String separator = ",";
+         String separator = ";";
         List<Double> values = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(separator);
                 for (String token : tokens) {
-                    values.add(Double.parseDouble(token));
+                values.add(Double.parseDouble(token));
                 }
             }
         } catch (IOException e) {
