@@ -12,27 +12,18 @@ import java.util.Scanner;
  *
  * @author Pedro Marcal - 2020300
  */
-public class ConcurrentSystemsCa extends Thread {
+public class CaTest extends Thread {
 
 	
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
     
-    	// Had to read and save the files here, was the only way to do it
-    	Scanner sc = new Scanner(new File("C:\\Users\\henri\\Downloads\\data.csv"));
-        List <Double>values = new ArrayList<Double>();
-        while (sc.hasNext()) {
-            String value = sc.next();
-            if (!value.isEmpty()) {
-                values.add(Double.parseDouble(value));
-            }
-        }
-        sc.close();
+
         
         
     	List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
     	
     	
-    	
+    	//Not working 
     	//MatrixResult matrixThread = new MatrixResult("C:\\Users\\henri\\Downloads\\data.csv");
     	
     	
@@ -48,14 +39,14 @@ public class ConcurrentSystemsCa extends Thread {
 			"3 - MergeSort \n" + "4 - All results in multithread \n");
 			
 			num = scanner.nextInt();
-			MatrixResult matrixResultThread = new MatrixResult(values);
+			
 			
 		  if (num == 1) {
 			StandardDeviation sdThread = new StandardDeviation();
 			sdThread.start();
 			
 		} if (num == 2) {
-			matrixResultThread.run();
+			
 			
 		} if (num == 3) {
 			mergeSortThread.start();
@@ -64,8 +55,6 @@ public class ConcurrentSystemsCa extends Thread {
 			StandardDeviation sdThread = new StandardDeviation();
 			  sdThread.start(); 
 			  mergeSortThread.start();
-			  matrixResultThread.run();	 
-			  
 		} else if (num >= 5) {
 			System.out.println("Wrong input!");
 			

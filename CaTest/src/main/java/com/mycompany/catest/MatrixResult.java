@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 
+
+// This particular method I could not run, something wrong with my file reading method.
 public class MatrixResult implements Runnable  {
     
 	// Creating variables
