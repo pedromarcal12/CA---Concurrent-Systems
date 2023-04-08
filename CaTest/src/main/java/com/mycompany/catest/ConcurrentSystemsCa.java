@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Pedro Marcal - 2020300
  */
-public class CaTest extends Thread {
+public class ConcurrentSystemsCa extends Thread {
 
 	
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
