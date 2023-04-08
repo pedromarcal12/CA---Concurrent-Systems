@@ -1,5 +1,4 @@
 
-
 package com.mycompany.catest;
 
 
@@ -11,16 +10,16 @@ import java.util.Scanner;
 /**
  *
  * @author Pedro Marcal - 2020300
+ * Ca Concurrent Systems
  */
+
+
 public class CaTest extends Thread {
 
 	
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
     
-
-        
-        
-    	List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
+List<Integer>data = file("C:\\Users\\henri\\Downloads\\data.csv");
     	
     	
     	//Not working 
@@ -34,12 +33,13 @@ public class CaTest extends Thread {
     		int num;
 			
     		
-			System.out.println("Type down :");
-			System.out.println("1 - Standard Deviation \n" + "2 - Result of the matrizes \n" + 
+			System.out.println("Choose your option");
+			System.out.println("1 - Standard Deviation \n" + "2 - Result of the matrizes(Not completed) \n" + 
 			"3 - MergeSort \n" + "4 - All results in multithread \n");
 			
 			num = scanner.nextInt();
 			
+		// Creating if method based on user input choice
 			
 		  if (num == 1) {
 			StandardDeviation sdThread = new StandardDeviation();
